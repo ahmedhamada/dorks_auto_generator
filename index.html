@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<style type="text/css">
+	#content{
+		display: none;
+	}
+</style>
+
+
+<input type="" onkeyup="append()" size="55" name="" />
+
+
+<div id="content"><pre>
+========================================
+=files and directories=
+========================================
+
+//indicate haw huge is google has links for the website
+site:|$|
+
+// Back link
+link:X -site:|$|
+
+//logs
+site:|$| inurl:logs*.
+
+//Finding passwords
+password filetype:docx OR filetype:doc OR filetype:pdf OR filetype:xls site:|$|
+
+//all subdomain
+site:|$| -inurl:www
+
+//just http scheme
+inurl:http:// site:|$| -inurl:https
+
+
+//get all not http&https scheme
+-inurl:http: -inurl:https site:|$| -filetype:pdf
+
+
+// sensitive files may contain vulns
+site:|$| inurl:*id* | inurl:*category* | inurl:*file* | inurl:*f* | inurl:*page* | inurl:id | inurl:id 
+
+//sensitive admin panel
+site:|$| inurl:admin OR intext:logged OR "dashboard" OR "administrator" OR "user" -intext:visitor -filetype:pdf
+
+//directory listing @ dangerious files
+site:|$| intext:"Index of /" +.htaccess
+site:|$| intext:"Index of" /"chat/logs"
+site:|$| intext:"Index of /" +.htaccess
+site:|$| intext:"Index of /" +passwd
+site:|$| intext:"Index of /" +password.txt
+site:|$| intext:"Index of /admin"
+site:|$| intext:"Index of /backup"
+site:|$| intext:"Index of /mail"
+site:|$| intitle:"index of" AND password OR passwd OR pwd intext:"last modified"
+site:|$| intext:"Index of /password"
+site:|$| intext:"The following report contains confidential information" vulnerability -search
+site:|$| intext:"phpMyAdmin" "running on" inurl:"main.php"
+site:|$| intitle:"index of" etc/shadow
+site:|$| intitle:"index of" htpasswd
+site:|$| intitle:"index of" master.passwd
+site:|$| intitle:"index of" mysql.conf OR mysql_config
+site:|$| intitle:"index of" passwd
+site:|$| intext: account details filetype: txt
+
+
+===========================================================
+========== FILES DIRECTORIES ▐ sesitive info ==============
+===========================================================
+
+//directory listing
+site:|$| intitle:"index of"
+
+//less result
+filetype:bak | filetype:db | filetype:sql | filetype:eml | filetype:old | filetype:inc | filetype:config | filetype:conf | filetype:pem | ext:mdb | filetype:ds_store | inurl:ws_ftp.ini | filetype:git | inurl:.git/config & site:|$| & -filetype:pdf
+
+//more results
+filetype:bak | inurl:.db | inurl:.sql | inurl:.eml | inurl:old| inurl:inc | inurl:.config | inurl:pem | inurl:.ds_store | inurl:ws_ftp.ini | inurl:.git | inurl:.git/config & site:|$| & -filetype:pdf
+
+
+//less impact filetypes
+site:|$| filetype:svn | filetype:idea | filetype:swp | filetype:stpasswd | filetype:coredump | filetype:winscp | filetype:filezilla.xml | filetype:xml | filetype:csv | filetype:txt | filetype:doc
+
+//more result
+site:|$| AND inurl:zip | inurl:tar | inurl:gz | inurl:tgz | inurl:rar  AND -inurl:pdf
+
+//less result
+site:|$| AND filetype:zip | filetype:tar | filetype:gz | filetype:tgz | filetype:rar  AND -inurl:pdf
+
+//all asp or php
+//get all asp | php scripts
+
+//for fun identity crisis :D 
+site:|$| & inurl:php & inurl:asp
+
+//sql inj
+inurl:= inurl:= intext:"Warning: mysql_fetch_assoc()" site:|$|
+
+//show all robots.txt 
+site:|$| ext:txt robot
+
+==================
+====get params====
+==================
+
+//links has at least 1 parameter
+site:|$| AND (inurl:= & inurl:?)
+site:|$| (inurl:= & inurl:?)
+
+//get links have parameters [why get ?id or ?file although you can get all params ] - 2 params @ least
+site:|$| -filetype:pdf AND inurl:& inurl:=
+
+//id param
+site:|$| -filetype:pdf inurl:*id*
+
+========================
+=====sensitive info=====
+========================
+
+===▐ best ▐===
+
+//good info [use allinurl]
+inurl:= inurl:& "illegal"|"invalid"| "account" | "details" |"fail"|"not found"|"unknown"|"sql"|"access"|"file" site:|$|
+inurl:= inurl:& "access"|"log"| "account" | "root" |"include"|"private"|"attach"|"upload"|"access"|"cmd" site:|$|
+inurl:= inurl:& "default"|"mail"| "bin" | "etc" |"shadow"|"boor"site:*.mil
+
+//error pages - content spoofing
+-filetype:pdf site:|$| inurl:error inurl:?
+site:|$| "error" "404" -filetype:pdf -filetype:doc
+-filetype:pdf site:|$| inurl:text +inurl:?
+
+//xss [no more ideas :D ]
+site:|$| (inurl:= & inurl:?) & inurl:text | inurl:title  | inurl:message| inurl:body
+
+//ssrf , open redirect
+site:|$| (inurl:= & inurl:?) & inurl:url | inurl:site | inurl:next | inurl:view | inurl:to | inurl:r | inurl:redirect | inurl:out | inurl:target | inurl:domain | inurl:fetch
+
+//warning & error in page contain parameters
+inurl:|$| inurl:& intext:"Warning" | intext:"error" site:*.mil
+
+//wordpress
+site:|$| intext:"powered by wordpress"
+
+// email
+site:|$| "*@*" -www.X
+</pre>
+
+</div>
+
+<div id="new">
+	
+</div>
+</body>
+
+
+
+<script type="text/javascript">
+	var content = document.getElementById('content').innerHTML
+	var my_new = document.getElementById('new')
+
+	function escapeRegExp(str) {
+	  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
+	}
+
+function append() {
+	var input_value = document.getElementsByTagName('input')[0].value
+	var final  = content.split("|$|").join(input_value);
+	my_new.innerHTML= final
+}
+
+</script>
+
+</html>
