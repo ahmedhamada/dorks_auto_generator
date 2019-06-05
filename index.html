@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +17,7 @@
 
 <div id="content"><pre>
 ========================================
-=files and directories=
+===========files and directories========
 ========================================
 
 //indicate haw huge is google has links for the website
@@ -148,6 +149,129 @@ site:|$| intext:"powered by wordpress"
 
 // email
 site:|$| "*@*" -www.X
+
+
+--------------------------------
+
+
+# Backlinks
+link:X -site:|$|
+
+
+# Documents / Key / Cert
+site:|$| filetype:crt || filetype:pem || filetype:der || filetype:cert || filetype:pdf || filetype:doc || filetype:xml || filetype:txt ||  filetype:xls || filetype:ppt || filetype:pps || filetype:docx || filetype:wps || filetype:rtf || filetype:csv || filetype:pptx || filetype:xlsx || filetype:xlr || filetype:sxw || filetype:psw
+
+
+# Configuration files
+site:|$| filetype:pwl || filetype:pol || filetype:pl || filetype:sh ||filetype:ini || filetype:ht || filetype:exe || filetype:cgi || filetype:api || filetype:pdb || filetype:sql || filetype:ins || filetype:cfg || filetype:keychain || filetype:prf || filetype:conf
+
+# Configuration files by extention
+site:|$| ext:xml | ext:conf | ext:cnf | ext:reg | ext:inf | ext:rdp | ext:ora | ext:log | ext:dbf | ext:mdb | ext:bkf | ext:bkp | ext:bak | ext:old | ext:backup
+
+# Archives
+site:|$| filetype:zip || filetype:rar || filetype:jar || filetype:tar.gz || filetype:7z || filetype:tar.b2z || filetype:tar.7z || filetype:tar
+
+# Error / SQL / Complete
+site:|$| inurl:"id=" intext:"sql syntax near" | intext:"syntax error has occurred" | intext:"incorrect syntax near" | intext:"unexpected end of SQL command" | intext:"Warning: mysql_connect()" | intext:"Warning: mysql_query()" | intext:"Warning: pg_connect()" | intext:"Warning: mysql_num_rows()" | intext:"Warning: ilesize()" | intext:"Warning: filesize()" | intext:"Warning: require()" | intext:"Warning: mysql_fetch_assoc()" | intext:"Warning: mysql_fetch_array()" | intext:"Warning: session_start()" | intext:"Warning: Unknown()" | intext:"Warning: getimagesize()" | intext:"Warning: is_writable()" | intext:"Warning: session_start()" | intext:"Warning: mysql_result()" | intext:"Warning: Warning: pg_exec()"
+
+# Keywords in url
+site:|$| inurl:admin||administrator||administrateur||login||l0gin||log||user||id||back||wso
+
+# Misc / other keywords in url
+site:|$| inurl:history||access||acces||log||license||readme||meta||root||sql||source||include||private||src||cgi||conf||account||asset||attach||audit||upload||auth||backup||bkup||build||cmd||demo||sample||default||defaut||mail||bin||etc||shadow||passwd||boot
+
+# ID
+site:|$| inurl:"id="
+site:|$| inurl:"php?id="
+
+# Index of
+site:|$| intitle:index.of
+
+
+(site:|$| inurl:s3)
+
+
+# Some resources for specific research / exploits / systems
+https://cxsecurity.com/dorks/
+https://www.exploit-db.com/google-hacking-database/
+
+
+============================================================
+#draft
+============================================================
+
+allinurl -vs- inurl
+site -vs- link
+
+intitle -vs- allintitle -vs- title
+allintitle:login page
+allintitle:login page lol
+allintitle:"login page lol"
+
+
+
+//get fb user&pass accounts - do it for scoped site
+filetype:txt intext:@ymail.com intext:facebook intext:password
+filetype:xls intext:@ymail.com intext:facebook intext:password
+filetype:doc intext:@ymail.com intext:facebook intext:password
+filetype:doc intext:@gmail.com intext:facebook intext:password
+filetype:doc intext:@yahoo.com intext:facebook intext:password
+
+
+===============# TIPS #==================
+
+-use custom time & 
+
+get hidden result by remove some result like =>> -unurl:sub.site.com
+note: inurl:*id* get more result than inurl:id
+
+//figure is dir has information disclusre
+link:ftp://tycho.usno.navy.mil/pub/
+enumerate subdomain by search step by step by site:  -site:
+
+inurl:& is maybe wrong -  use inurl:? instead
+
+Remove Multiple Subdomains
+Example use: site:domainname.com -inurl:stage -inurl:dev -inurl:staging
+
+site:fayoum.edu.eg AND (inurl:= & inurl:?)  is different than site:fayoum.edu.eg AND (inurl:= AND inurl:?)
+
+between intitle:  , allintitle , inurl , intext , allintext , filetype etc no (AND , &)
+
+//not respond to my operator
+site:www.fayoum.edu.eg inurl:*id* -allinurl:"showCV.aspx Courses/CDetails.aspx" & -allinurl:showCV
+site:www.fayoum.edu.eg inurl:*id* -allinurl:"showCV.aspx -inurl:Courses/CDetails.aspx *showCV*"
+
+i want to get this link as result
+http://www.fayoum.edu.eg/AdDetails.aspx?adsId=7303
+
+//this work but don't want to do this
+site:fayoum.edu.eg  inurl:*id*  inurl:AdDetails
+
+AND operator is not necessary to specify it, because it is automatically implied. So don’t bother with it.
+
+//rest api custom search ☻☻☻☻☻☻☻☻☻☻
+https://developers.google.com/custom-search/json-api/v1/using_rest
+
+
+//later
+subdomian takover search engine
+
+
+=====# resources #=====
+
+https://apollonsky.me/growth-hacking-google-dork/
+https://moz.com/blog/mastering-google-search-operators-in-67-steps
+https://moz.com/blog/25-killer-combos-for-googles-site-operator
+https://moz.com/learn/seo/search-operators
+http://www.googleguide.com/advanced_operators_reference.html#allinurl
+https://productforums.google.com/forum/#!topic/websearch/9q6vrgAAYyY
+https://moz.com/learn/seo/search-operators
+
+
+
+
+
 </pre>
 
 </div>
