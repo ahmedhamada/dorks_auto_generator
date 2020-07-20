@@ -11,14 +11,36 @@
 	}
 </style>
 
-
+domain:
 <input type="" onkeyup="append()" size="55" name="" />
+<br>
 
-
+company name:
+<input type="" onkeyup="append2()" size="55" name="" />
 <div id="content"><pre>
 ========================================
 ===========files and directories========
 ========================================
+//manually
+site:codepad.co "||$||"
+site:scribd.com "||$||"
+site:npmjs.com "||$||"
+site:npm.runkit.com "||$||"
+site:libraries.io "||$||"
+site:coggle.it "||$||"
+site:papaly.com "||$||"
+site:trello.com "||$||"
+site:prezi.com "||$||"
+site:jsdelivr.net "||$||"
+site:codepen.io "||$||"
+site:pastebin.com "||$||"
+site:repl.it "||$||"
+site:gitter.im "||$||"
+site:bitbucket.org "||$||"
+site:*.atlassian.net "||$||"
+Inurl:gitlab "||$||"
+
+
 
 //indicate haw huge is google has links for the website
 site:|$|
@@ -320,6 +342,11 @@ function append() {
 	my_new.innerHTML= final
 }
 
+function append2() {
+	var input_value = document.getElementsByTagName('input')[0].value
+	var final  = content.split("||$||").join(input_value);
+	my_new.innerHTML= final
+}
 </script>
 
 </html>
